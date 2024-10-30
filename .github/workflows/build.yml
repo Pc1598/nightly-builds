@@ -88,23 +88,6 @@ jobs:
           path: out/*-davinci.img*
           retention-days: 7
 
-      - name: Build xiaomi-surya
-        run: |
-          cp xiaomi-surya.cfg ~/.config/pmbootstrap.cfg
-          pmbootstrap install --password 147147
-          pmbootstrap export
-          cp /tmp/postmarketOS-export/boot.img out/boot-xiaomi-surya.img
-          cp /tmp/postmarketOS-export/xiaomi-surya.img out/rootfs-xiaomi-surya.img
-          xz -T0 -9e -v out/rootfs-xiaomi-surya.img
-          echo -e "n\nn\ny\n" | pmbootstrap zap
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: xiaomi-surya-${{ env.KERNEL_BRANCH }}
-          path: out/*-surya.img*
-          retention-days: 7
-
       - name: Build xiaomi-sweet
         run: |
           cp xiaomi-sweet.cfg ~/.config/pmbootstrap.cfg
@@ -139,19 +122,3 @@ jobs:
           path: out/*-sweet_k6a.img*
           retention-days: 7
 
-      - name: Build xiaomi-toco
-        run: |
-          cp xiaomi-toco.cfg ~/.config/pmbootstrap.cfg
-          pmbootstrap install --password 147147
-          pmbootstrap export
-          cp /tmp/postmarketOS-export/boot.img out/boot-xiaomi-toco.img
-          cp /tmp/postmarketOS-export/xiaomi-toco.img out/rootfs-xiaomi-toco.img
-          xz -T0 -9e -v out/rootfs-xiaomi-toco.img
-          echo -e "n\nn\ny\n" | pmbootstrap zap
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: xiaomi-toco-${{ env.KERNEL_BRANCH }}
-          path: out/*-toco.img*
-          retention-days: 7
